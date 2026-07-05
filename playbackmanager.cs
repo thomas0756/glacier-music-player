@@ -4,6 +4,8 @@ public static class PlaybackManager
     static List<Song> history = new();
     static Song? current;
 
+    static bool playing = false;
+
     public static Song? GetCurrentSong()
     {
         return current;
@@ -27,6 +29,7 @@ public static class PlaybackManager
         {
             Console.WriteLine("[NextSong] Nothing in queue to play, ending playback.");
             current = null;
+            playing = false;
         }
     }
     public static void AddSongToQueue(Song song)
@@ -45,13 +48,21 @@ public static class PlaybackManager
             {
                 Console.WriteLine("[PrevSong] History is empty, ending playback.");
                 current = null;
+                playing = false;
             }
         }
     }
-    public static LinkedList<Song> GetQueue() {
+    public static LinkedList<Song> GetQueue()
+    {
         return queue;
     }
-    public static List<Song> GetHistory() {
+    public static List<Song> GetHistory()
+    {
         return history;
+    }
+    public static void TogglePlayback()
+    {
+        playing = !playing;
+        Console.WriteLine(playing ? "Playback Resumed/Started" : "Playback Paused");
     }
 }
