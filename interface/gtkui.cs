@@ -1,3 +1,5 @@
+using ManagedBass;
+
 public static class GtkInterface
 {
     public static int Init()
@@ -15,6 +17,10 @@ public static class GtkInterface
             box.SetMarginEnd(8);
             box.SetMarginTop(8);
             box.SetMarginBottom(8);
+
+            Gtk.Box queues_box = VSongLists.EmptyVList();
+            queues_box.Append(VSongLists.PlainSongList(PlaybackManager.GetQueue()));
+            queues_box.Append(VSongLists.PlainSongList(PlaybackManager.GetHistory()));
 
             box.Append(PlaybackButtons.NextButton());
             box.Append(PlaybackButtons.PrevButton());
