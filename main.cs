@@ -1,4 +1,6 @@
-﻿class GlacialMusicPlayer
+﻿using GLib;
+
+class GlacialMusicPlayer
 {
     static void Main()
     {
