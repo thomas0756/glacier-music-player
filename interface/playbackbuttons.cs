@@ -2,32 +2,43 @@ public static class PlaybackButtons
 {
     public static Gtk.Button NextButton()
     {
-        Gtk.Button next_button = ButtonGenerator.GenerateButton();
-        next_button.Label = "Next Song";
-        next_button.OnClicked += (_, _) =>
+        Gtk.Button button = ButtonGenerator.GenerateButton();
+        button.Label = "Next Song";
+        button.OnClicked += (_, _) =>
         {
             PlaybackManager.NextSong();
         };
-        return next_button;
+        return button;
     }
     public static Gtk.Button PrevButton()
     {
-        Gtk.Button next_button = ButtonGenerator.GenerateButton();
-        next_button.Label = "Previous Song";
-        next_button.OnClicked += (_, _) =>
+        Gtk.Button button = ButtonGenerator.GenerateButton();
+        button.Label = "Previous Song";
+        button.OnClicked += (_, _) =>
         {
             PlaybackManager.PrevSong();
         };
-        return next_button;
+        return button;
     }
     public static Gtk.Button PausePlayButton()
     {
-        Gtk.Button next_button = ButtonGenerator.GenerateButton();
-        next_button.Label = "Pause / Play";
-        next_button.OnClicked += (_, _) =>
+        Gtk.Button button = ButtonGenerator.GenerateButton();
+        button.Label = "Pause / Play";
+        button.OnClicked += (_, _) =>
         {
             PlaybackManager.TogglePlayback();
         };
-        return next_button;
+        return button;
+    }
+
+    public static Gtk.Button StopButton()
+    {
+        Gtk.Button button = ButtonGenerator.GenerateButton();
+        button.Label = "Stop";
+        button.OnClicked += (_, _) =>
+        {
+            PlaybackManager.StopPlayback();
+        };
+        return button;
     }
 }

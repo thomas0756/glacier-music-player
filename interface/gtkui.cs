@@ -19,6 +19,7 @@ public static class GtkInterface
             box.Append(PlaybackButtons.NextButton());
             box.Append(PlaybackButtons.PrevButton());
             box.Append(PlaybackButtons.PausePlayButton());
+            box.Append(PlaybackButtons.StopButton());
 
             window.Child = box;
             window.Show();

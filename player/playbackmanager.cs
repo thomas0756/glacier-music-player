@@ -1,10 +1,10 @@
+using ManagedBass;
+
 public static class PlaybackManager
 {
     static LinkedList<Song> queue = new();
-    static List<Song> history = new();
+    static List<Song> history = [];
     static Song? current;
-
-    static bool playing = false;
 
     public static Song? GetCurrentSong()
     {
@@ -24,12 +24,12 @@ public static class PlaybackManager
         {
             current = queue.First.Value;
             queue.RemoveFirst();
+            ManagedBassPlayback.PlayFile(current.path);
         }
         else
         {
             Console.WriteLine("[NextSong] Nothing in queue to play, ending playback.");
             current = null;
-            playing = false;
         }
     }
     public static void AddSongToQueue(Song song)
@@ -41,14 +41,17 @@ public static class PlaybackManager
         {
             if (history.Count > 0)
             {
-                current = history.First();
-                history.RemoveAt(0);
+                if (current != null)
+                {
+                    queue.AddFirst(current);
+                }
+                current = history.Last();
+                history.RemoveAt(history.Count - 1);
             }
             else
             {
                 Console.WriteLine("[PrevSong] History is empty, ending playback.");
                 current = null;
-                playing = false;
             }
         }
     }
@@ -62,7 +65,34 @@ public static class PlaybackManager
     }
     public static void TogglePlayback()
     {
-        playing = !playing;
-        Console.WriteLine(playing ? "Playback Resumed/Started" : "Playback Paused");
+        Console.WriteLine("Playback toggled");
+        PlaybackState state = ManagedBassPlayback.GetPlaybackState();
+
+        if (current == null)
+        {
+            NextSong();
+        }
+        else
+        {
+           if (state == PlaybackState.Stopped)
+           {
+                ManagedBassPlayback.PlayFile(current.path);
+           }
+           else
+           {
+                ManagedBassPlayback.TogglePlayback();
+           }
+        }
+    }
+
+    public static void StopPlayback()
+    {
+        ManagedBassPlayback.StopPlayback();
+    }
+
+    public static void PlaySong(Song song)
+    {
+        AddSongToQueue(song);
+        NextSong();
     }
 }
