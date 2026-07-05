@@ -9,7 +9,13 @@ public static class GtkInterface
             window.Title = "Glacier Music Player";
             window.SetDefaultSize(300, 300);
 
-            var box = Gtk.Box.New(Gtk.Orientation.Horizontal, 6);
+            var box = Gtk.Box.New(Gtk.Orientation.Horizontal, 8);
+            
+            box.SetMarginStart(8);
+            box.SetMarginEnd(8);
+            box.SetMarginTop(8);
+            box.SetMarginBottom(8);
+
             box.Append(PlaybackButtons.NextButton());
             box.Append(PlaybackButtons.PrevButton());
             box.Append(PlaybackButtons.PausePlayButton());
