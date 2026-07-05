@@ -18,14 +18,15 @@ public static class PlaybackManager
         {
             Console.WriteLine("[NextSong] Nothing is playing, not updating history.");
         }
-        current = queue.FirstOrDefault();
-        if (current != null)
+        if (queue.First != null)
         {
+            current = queue.First.Value;
             queue.RemoveFirst();
         }
         else
         {
             Console.WriteLine("[NextSong] Nothing in queue to play, ending playback.");
+            current = null;
         }
     }
     public static void AddSongToQueue(Song song)
@@ -35,7 +36,7 @@ public static class PlaybackManager
     public static void PrevSong()
     {
         {
-            if (history.First() != null)
+            if (history.Count > 0)
             {
                 current = history.First();
                 history.RemoveAt(0);
