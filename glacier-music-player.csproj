@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <PackageReference Include="GirCore.Gtk-4.0" Version="0.8.0" />
+    <PackageReference Include="ManagedBass" Version="4.1.0-prerelease" />
   </ItemGroup>
 
 </Project>
