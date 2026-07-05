@@ -10,6 +10,7 @@ public static class VSongLists
         {
             String song_info = song.artist + " - " + song.title;
             Gtk.Label label = Gtk.Label.New(song_info);
+            label.SetXalign(0);
             vlist.Append(label);
         }
         return vlist;
@@ -21,6 +22,7 @@ public static class VSongLists
         {
             String song_info = song.artist + " - " + song.title;
             Gtk.Label label = Gtk.Label.New(song_info);
+            label.SetXalign(0);
             vlist.Append(label);
         }
         return vlist;

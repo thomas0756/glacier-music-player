@@ -21,7 +21,8 @@ public static class GtkInterface
             Gtk.Box queues_box = VSongLists.EmptyVList();
             queues_box.Append(VSongLists.PlainSongList(PlaybackManager.GetQueue()));
             queues_box.Append(VSongLists.PlainSongList(PlaybackManager.GetHistory()));
-
+            box.Append(queues_box);
+            
             box.Append(PlaybackButtons.NextButton());
             box.Append(PlaybackButtons.PrevButton());
             box.Append(PlaybackButtons.PausePlayButton());
