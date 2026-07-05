@@ -3,6 +3,7 @@ public static class PlaybackManager
     static LinkedList<Song> queue = new();
     static List<Song> history = new();
     static Song? current;
+
     public static Song? GetCurrentSong()
     {
         return current;
@@ -33,14 +34,23 @@ public static class PlaybackManager
     }
     public static void PrevSong()
     {
-        if (history.First() != null) {
-            current = history.First();
-            history.RemoveAt(0);
-        }
-        else
         {
-            Console.WriteLine("[PrevSong] History is empty, ending playback.");
-            current = null;
+            if (history.First() != null)
+            {
+                current = history.First();
+                history.RemoveAt(0);
+            }
+            else
+            {
+                Console.WriteLine("[PrevSong] History is empty, ending playback.");
+                current = null;
+            }
         }
+    }
+    public static LinkedList<Song> GetQueue() {
+        return queue;
+    }
+    public static List<Song> GetHistory() {
+        return history;
     }
 }
