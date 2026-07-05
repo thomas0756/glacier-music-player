@@ -8,6 +8,11 @@ public static class GtkInterface
             var window = Gtk.ApplicationWindow.New((Gtk.Application)sender);
             window.Title = "Glacier Music Player";
             window.SetDefaultSize(300, 300);
+
+            var box = Gtk.Box.New(Gtk.Orientation.Horizontal, 6);
+            box.Append(new NextButton().Widget);
+
+            window.Child = box;
             window.Show();
         };
         return application.RunWithSynchronizationContext(null);
