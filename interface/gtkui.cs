@@ -10,7 +10,9 @@ public static class GtkInterface
             window.SetDefaultSize(300, 300);
 
             var box = Gtk.Box.New(Gtk.Orientation.Horizontal, 6);
-            box.Append(new NextButton().Widget);
+            box.Append(PlaybackButtons.NextButton());
+            box.Append(PlaybackButtons.PrevButton());
+            box.Append(PlaybackButtons.PausePlayButton());
 
             window.Child = box;
             window.Show();
