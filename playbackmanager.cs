@@ -2,22 +2,29 @@ public static class PlaybackManager
 {
     static LinkedList<Song> queue = new();
     static List<Song> history = new();
-
+    static Song? current;
     public static Song? GetCurrentSong()
     {
-        return queue.FirstOrDefault();
+        return current;
     }
     public static void NextSong()
     {
-        Song? prev_song = GetCurrentSong();
-        if (prev_song != null)
+        if (current != null)
         {
-            queue.RemoveFirst();
-            history.Add(prev_song);
+            history.Add(current);
         }
         else
         {
-            Console.WriteLine("Nothing in queue");
+            Console.WriteLine("[NextSong] Nothing is playing, not updating history.");
+        }
+        current = queue.FirstOrDefault();
+        if (current != null)
+        {
+            queue.RemoveFirst();
+        }
+        else
+        {
+            Console.WriteLine("[NextSong] Nothing in queue to play, ending playback.");
         }
     }
     public static void AddSongToQueue(Song song)
@@ -26,15 +33,14 @@ public static class PlaybackManager
     }
     public static void PrevSong()
     {
-        Song? new_song = history.LastOrDefault();
-        if (new_song != null)
-        {
-            history.RemoveAt(history.Count - 1);
-            queue.AddFirst(new_song);
+        if (history.First() != null) {
+            current = history.First();
+            history.RemoveAt(0);
         }
         else
         {
-            Console.WriteLine("Cannot play previous song, history is empty.");
+            Console.WriteLine("[PrevSong] History is empty, ending playback.");
+            current = null;
         }
     }
 }
