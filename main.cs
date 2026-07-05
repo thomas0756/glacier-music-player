@@ -22,5 +22,8 @@
         Console.WriteLine(PlaybackManager.GetCurrentSong().title);
         PlaybackManager.PrevSong();
         Console.WriteLine(PlaybackManager.GetCurrentSong().title);
+        PlaybackManager.PrevSong();
+        PlaybackManager.PrevSong();
+        PlaybackManager.PrevSong();
     }
 }
