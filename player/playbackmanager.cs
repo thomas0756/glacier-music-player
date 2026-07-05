@@ -1,3 +1,4 @@
+using System.Globalization;
 using ManagedBass;
 
 public static class PlaybackManager
@@ -14,6 +15,7 @@ public static class PlaybackManager
     {
         if (current != null)
         {
+            StopPlayback();
             history.Add(current);
         }
         else
@@ -31,10 +33,12 @@ public static class PlaybackManager
             Console.WriteLine("[NextSong] Nothing in queue to play, ending playback.");
             current = null;
         }
+        SongUpdated?.Invoke();
     }
     public static void AddSongToQueue(Song song)
     {
         queue.AddLast(song);
+        SongUpdated?.Invoke();
     }
     public static void PrevSong()
     {
@@ -44,16 +48,20 @@ public static class PlaybackManager
                 if (current != null)
                 {
                     queue.AddFirst(current);
+                    StopPlayback();
                 }
                 current = history.Last();
                 history.RemoveAt(history.Count - 1);
+                TogglePlayback();
             }
             else
             {
                 Console.WriteLine("[PrevSong] History is empty, ending playback.");
+                StopPlayback();
                 current = null;
             }
         }
+        SongUpdated?.Invoke();
     }
     public static LinkedList<Song> GetQueue()
     {
@@ -95,4 +103,7 @@ public static class PlaybackManager
         AddSongToQueue(song);
         NextSong();
     }
+
+
+    public static event Action SongUpdated;
 }

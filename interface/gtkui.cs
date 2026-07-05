@@ -19,8 +19,10 @@ public static class GtkInterface
             box.SetMarginBottom(8);
 
             Gtk.Box queues_box = VSongLists.EmptyVList();
-            queues_box.Append(VSongLists.PlainSongList(PlaybackManager.GetQueue()));
-            queues_box.Append(VSongLists.PlainSongList(PlaybackManager.GetHistory()));
+            queues_box.Append(Gtk.Label.New("Queue"));
+            queues_box.Append(new VSongList(PlaybackManager.GetQueue()).Widget);
+            queues_box.Append(Gtk.Label.New("History"));
+            queues_box.Append(new VSongList(PlaybackManager.GetHistory()).Widget);
             box.Append(queues_box);
             
             box.Append(PlaybackButtons.NextButton());
