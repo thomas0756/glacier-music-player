@@ -105,5 +105,5 @@ public static class PlaybackManager
     }
 
 
-    public static event Action SongUpdated;
+    public static event Action? SongUpdated;
 }
