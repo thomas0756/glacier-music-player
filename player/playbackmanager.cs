@@ -7,6 +7,11 @@ public static class PlaybackManager
     static List<Song> history = [];
     static Song? current;
 
+    public static void Init()
+    {
+        ManagedBassPlayback.SongFinished += NextSong;
+    }
+
     public static Song? GetCurrentSong()
     {
         return current;
