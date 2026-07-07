@@ -1,3 +1,4 @@
+using System.Reflection.PortableExecutable;
 using TagLib;
 
 public static class MetadataHandler
@@ -41,6 +42,30 @@ public static class MetadataHandler
         else
         {
             Console.WriteLine("File '" + path + "' does not exist.");
+            return null;
+        }
+    }
+
+    public static List<Song>? CreateSongsFromFolder(String path)
+    {
+        if (Directory.Exists(path))
+        {
+            List<Song> list_to_return = [];
+
+            string[] paths_in_dir = Directory.GetFiles(path);
+            foreach (String song_path in paths_in_dir)
+            {
+                Song? song = CreateSongFromFile(song_path);
+                if (song != null)
+                {
+                    list_to_return.Add(song);
+                }
+            }
+            return list_to_return;
+        }
+        else
+        {
+            Console.WriteLine("Directory '" + path + "' does not exist.");
             return null;
         }
     }
