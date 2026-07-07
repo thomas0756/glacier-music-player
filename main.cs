@@ -4,6 +4,7 @@
     {
         Console.WriteLine("Thanks for using Glacier!");
 
+        PlaybackManager.Init();
         ManagedBassPlayback.Init();
 
         int excode = GtkInterface.Init();
