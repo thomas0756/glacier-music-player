@@ -3,7 +3,8 @@ using ManagedBass;
 public static class ManagedBassPlayback
 {
 
-    public static int stream;
+    static int stream;
+    static readonly SyncProcedure endSync = OnSongFinished;
 
     public static void Init()
     {
@@ -15,6 +16,7 @@ public static class ManagedBassPlayback
     {
         Console.WriteLine("Playing " + path);
         stream = Bass.CreateStream(path, 0, (long)BassFlags.Default);
+        Bass.ChannelSetSync(stream, SyncFlags.End, 0, endSync);
         Bass.ChannelPlay(stream);
         //Bass.Free();
     }
@@ -43,4 +45,11 @@ public static class ManagedBassPlayback
     {
         return Bass.ChannelIsActive(stream);
     }
+
+    static void OnSongFinished(int handle, int channel, int data, IntPtr user)
+    {
+        SongFinished?.Invoke();
+    }
+
+    public static event Action? SongFinished;
 }
